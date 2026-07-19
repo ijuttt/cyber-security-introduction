@@ -172,3 +172,84 @@ Sebelum bahas offensive vs defensive, penting paham dulu **3 pilar skillset dasa
 ## 3.3. Studi Kasus
 - 3.3.1. Contoh serangan nyata (walkthrough singkat, misal ransomware attack chain)
 - 3.3.2. Analisis: skillset apa yang dipakai attacker di tiap tahap (kaitkan lagi ke 3 pilar skillset) & Analisis CIA Triad
+
+# 4. Demo (Hands-on Lab — Blackbox Simulation)
+
+## 4.1. Sesi Offensive (Attacker Side)
+
+### 4.1.1. Reconnaissance
+- Port scanning ke target (`nmap -sV -p- <target-ip>`)
+- Identifikasi service & versi yang berjalan (fingerprinting)
+- Temukan database port yang exposed (misal port 3306/5432/27017 terbuka tanpa autentikasi/filtering)
+- Enumerasi endpoint aplikasi web (manual browsing / directory brute-force)
+
+### 4.1.2. Exploitation — Database Exposed
+- Coba koneksi langsung ke database dari luar (`mysql -h <target-ip> -u root`)
+- Demonstrasi: kalau credential default/lemah, langsung bisa masuk tanpa lewat aplikasi sama sekali
+- Tunjukkan risiko: data bisa diakses/diekstrak langsung dari luar tanpa exploit rumit — cukup karena kesalahan konfigurasi (network exposure)
+
+### 4.1.3. Exploitation — BOLA di Aplikasi
+- Login sebagai user A, ambil token/session
+- Coba akses endpoint dengan mengganti `id` milik user lain (misal `id=1` → `id=2`)
+- Tunjukkan aplikasi tidak melakukan object-level authorization check → data user lain bisa diakses (data leakage)
+- Screenshot/log request-response sebagai bukti (evidence)
+
+### 4.1.4. Menghitung CVSS Score
+- Breakdown metric CVSS v3.1/v4.0 untuk kedua temuan:
+  - **Attack Vector (AV)** — Network
+  - **Attack Complexity (AC)** — Low/High
+  - **Privileges Required (PR)** — None/Low
+  - **User Interaction (UI)** — None
+  - **Scope (S)** — Unchanged/Changed
+  - **Confidentiality/Integrity/Availability Impact (C/I/A)**
+- Hitung skor akhir & tentukan severity (Low/Medium/High/Critical) pakai kalkulator resmi FIRST.org
+- Bandingkan skor temuan 1 (DB exposed) vs temuan 2 (BOLA) — diskusikan kenapa bisa beda severity
+
+### 4.1.5. Membuat Laporan (Reporting)
+- Struktur laporan pentest sederhana:
+  - Executive Summary
+  - Scope & Methodology
+  - Findings (per temuan): deskripsi, bukti, CVSS score, affected endpoint/asset
+  - Impact & Risk Rating
+  - Rekomendasi remediasi
+- Latihan: peserta bikin 1 halaman laporan dari temuan yang baru saja didapat
+
+---
+
+## 4.2. Sesi Defensive (Defender Side)
+
+### 4.2.1. Remediasi — Database Exposed
+- Konfigurasi firewall (`ufw`/`iptables`/security group cloud) agar port database hanya bisa diakses dari internal network/application server, bukan dari luar
+- Best practice tambahan:
+  - Bind database ke `localhost`/internal IP saja, bukan `0.0.0.0`
+  - Ganti/hapus credential default
+  - Terapkan network segmentation (DB di subnet terpisah dari public-facing app)
+
+### 4.2.2. Remediasi — BOLA
+- Tambahkan middleware/authorization check di endpoint yang rentan:
+  - Validasi bahwa `id` yang diminta memang milik user yang sedang login (ownership check)
+  - Terapkan prinsip least privilege di level object, bukan cuma level endpoint
+- Contoh pola perbaikan (pseudocode):
+  ```
+  if requested_resource.owner_id != current_user.id:
+      return 403 Forbidden
+  ```
+- Tambahkan logging untuk percobaan akses tidak sah (buat deteksi ke depannya)
+
+### 4.2.3. Verifikasi Perbaikan
+- Ulangi langkah exploitation di 4.1.2 dan 4.1.3 — pastikan sekarang gagal (403/connection refused)
+- Bandingkan before-after: tunjukkan hasil scan/request sebelum vs sesudah patch
+
+### 4.2.4. Update Laporan
+- Tambahkan status **"Remediated"** di laporan pentest
+- Diskusi: kenapa retest itu penting sebelum laporan ditutup
+
+---
+
+## 4.3. Wrap-up & Diskusi
+- 4.3.1. Rekap siklus lengkap: Recon → Exploit → Assess (CVSS) → Report → Remediate → Verify — mirror dari siklus offensive-defensive di Bab 2
+- 4.3.2. Kaitkan lagi ke pilar skillset (Bab 2.0):
+  - Recon & exploit DB butuh **Network**
+  - Exploit BOLA & bikin middleware butuh **Programming**
+  - Firewall & permission butuh **OS**
+- 4.3.3. Q&A / Diskusi terbuka
