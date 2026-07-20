@@ -1,0 +1,82 @@
+<svg viewBox="0 0 1040 460" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <rect x="0" y="0" width="1040" height="460" fill="#ffffff"/>
+
+  <text x="520" y="34" text-anchor="middle" font-size="22" font-weight="bold" fill="#0f172a">Cyber Kill Chain (Lockheed Martin)</text>
+  <text x="520" y="56" text-anchor="middle" font-size="13" fill="#64748b">7 tahapan linear yang ditempuh penyerang, dari pengintaian hingga tujuan akhir tercapai</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Row 1 arrows -->
+  <line x1="265" y1="165" x2="295" y2="165" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="505" y1="165" x2="535" y2="165" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="745" y1="165" x2="775" y2="165" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Connector row1 -> row2 -->
+  <path d="M 880 220 L 880 250 L 280 250 L 280 290" fill="none" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Row 2 arrows -->
+  <line x1="385" y1="355" x2="415" y2="355" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="625" y1="355" x2="655" y2="355" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Box 1: Reconnaissance -->
+  <rect x="55" y="110" width="210" height="110" rx="12" fill="#1e40af"/>
+  <circle cx="83" cy="138" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="83" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">1</text>
+  <text x="107" y="143" text-anchor="start" font-size="13.5" font-weight="bold" fill="#ffffff">Reconnaissance</text>
+  <text x="160" y="172" text-anchor="middle" font-size="11" fill="#dbeafe">Mengumpulkan informasi</text>
+  <text x="160" y="187" text-anchor="middle" font-size="11" fill="#dbeafe">tentang target</text>
+
+  <!-- Box 2: Weaponization -->
+  <rect x="295" y="110" width="210" height="110" rx="12" fill="#4338ca"/>
+  <circle cx="323" cy="138" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="323" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">2</text>
+  <text x="347" y="143" text-anchor="start" font-size="13.5" font-weight="bold" fill="#ffffff">Weaponization</text>
+  <text x="400" y="172" text-anchor="middle" font-size="11" fill="#e0e7ff">Menyiapkan senjata siber</text>
+  <text x="400" y="187" text-anchor="middle" font-size="11" fill="#e0e7ff">(malware/exploit)</text>
+
+  <!-- Box 3: Delivery -->
+  <rect x="535" y="110" width="210" height="110" rx="12" fill="#7c3aed"/>
+  <circle cx="563" cy="138" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="563" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">3</text>
+  <text x="587" y="143" text-anchor="start" font-size="13.5" font-weight="bold" fill="#ffffff">Delivery</text>
+  <text x="640" y="172" text-anchor="middle" font-size="11" fill="#ede9fe">Mengirim senjata ke</text>
+  <text x="640" y="187" text-anchor="middle" font-size="11" fill="#ede9fe">target (email, USB, dll)</text>
+
+  <!-- Box 4: Exploitation -->
+  <rect x="775" y="110" width="210" height="110" rx="12" fill="#a21caf"/>
+  <circle cx="803" cy="138" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="803" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">4</text>
+  <text x="827" y="143" text-anchor="start" font-size="13.5" font-weight="bold" fill="#ffffff">Exploitation</text>
+  <text x="880" y="172" text-anchor="middle" font-size="11" fill="#fae8ff">Mengeksekusi celah</text>
+  <text x="880" y="187" text-anchor="middle" font-size="11" fill="#fae8ff">keamanan yang ditemukan</text>
+
+  <!-- Box 5: Installation -->
+  <rect x="175" y="300" width="210" height="110" rx="12" fill="#be123c"/>
+  <circle cx="203" cy="328" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="203" y="333" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">5</text>
+  <text x="227" y="333" text-anchor="start" font-size="13.5" font-weight="bold" fill="#ffffff">Installation</text>
+  <text x="280" y="362" text-anchor="middle" font-size="11" fill="#ffe4e6">Memasang backdoor/</text>
+  <text x="280" y="377" text-anchor="middle" font-size="11" fill="#ffe4e6">malware agar persisten</text>
+
+  <!-- Box 6: Command & Control -->
+  <rect x="415" y="300" width="210" height="110" rx="12" fill="#c2410c"/>
+  <circle cx="443" cy="328" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="443" y="333" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">6</text>
+  <text x="467" y="333" text-anchor="start" font-size="12" font-weight="bold" fill="#ffffff">Command &amp; Control</text>
+  <text x="520" y="362" text-anchor="middle" font-size="11" fill="#ffedd5">Membangun kendali</text>
+  <text x="520" y="377" text-anchor="middle" font-size="11" fill="#ffedd5">jarak jauh (C2)</text>
+
+  <!-- Box 7: Actions on Objectives -->
+  <rect x="655" y="300" width="210" height="110" rx="12" fill="#b91c1c"/>
+  <circle cx="683" cy="328" r="16" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="683" y="333" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">7</text>
+  <text x="707" y="333" text-anchor="start" font-size="11.5" font-weight="bold" fill="#ffffff">Actions on Objectives</text>
+  <text x="760" y="362" text-anchor="middle" font-size="11" fill="#fee2e2">Mencapai tujuan akhir</text>
+  <text x="760" y="377" text-anchor="middle" font-size="11" fill="#fee2e2">(eksfiltrasi, sabotase, dll)</text>
+
+  <text x="520" y="440" text-anchor="middle" font-size="12" fill="#94a3b8">Gambar 3.1 — Tahapan Cyber Kill Chain; sebagian besar kontrol defensif dirancang untuk memutus rantai ini sedini mungkin</text>
+</svg>
